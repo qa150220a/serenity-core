@@ -1,0 +1,36 @@
+ext {
+    bintrayPackage = 'serenity-mock-mvc'
+    projectDescription = 'Serenity RestAssured with MockMvc integration'
+}
+
+dependencies {
+    compile project(':serenity-core')
+    compile ("io.rest-assured:spring-mock-mvc:${restAssuredVersion}") {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-xml'
+        exclude group: 'org.apache.httpcomponents', module:'httpclient'
+        exclude group: 'org.apache.httpcomponents', module:'httpmime'
+        exclude group: 'org.codehaus.groovy', module:'groovy'
+        exclude group: 'commons-codec', module:'commons-codec'
+        // 4.2.6.RELEASE vs 4.3.5.RELEASE
+        exclude group: 'org.springframework', module:'spring-beans'
+        exclude group: 'org.springframework', module:'spring-core'
+        exclude group: 'org.springframework', module:'spring-expression'
+        exclude group: 'org.springframework', module:'spring-aop'
+        exclude group: 'org.springframework', module:'spring-test'
+        exclude group: 'org.springframework', module:'spring-webmvc'
+    }
+    /*compile ("io.rest-assured:rest-assured:${restAssuredVersion}") {
+        //exclude group: 'io.rest-assured', module:'json-path'
+        //exclude group: 'io.rest-assured', module:'xml-path'
+        exclude group: 'org.apache.httpcomponents', module:'httpclient'
+        exclude group: 'org.apache.httpcomponents', module:'httpmime'
+        exclude group: 'org.codehaus.groovy', module:'groovy'
+        exclude group: 'commons-codec', module:'commons-codec'
+    }*/
+    testCompile ("com.github.tomakehurst:wiremock:$wiremockCoreVersion") {
+        exclude group: 'com.google.guava', module:'guava'
+        exclude group: 'org.apache.httpcomponents', module:'httpclient'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+    testCompile project(':serenity-test-utils')
+}
